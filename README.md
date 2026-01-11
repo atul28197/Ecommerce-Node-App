@@ -102,3 +102,72 @@ The implementation uses Node.js, Express, Sequelize ORM, JWT auth, and an in-mem
 
 `.env`:
 
+
+PORT=3000
+JWT_SECRET=secret
+DISCOUNT_NTH=5
+
+
+---
+
+## 6. Running Locally
+
+
+
+npm install
+npm run dev
+
+
+App listens on `http://localhost:3000`
+
+SQLite runs in-memory → data resets per restart
+
+---
+
+## 7. Tests
+
+Run Jest tests:
+
+
+
+npm test
+
+
+Tests cover:
+
+✔ Checkout w/o code  
+✔ Checkout w/ code  
+✔ Code invalidation  
+✔ Metrics reporting  
+
+---
+
+## 8. Postman Collection
+
+`postman_collection.json` included with test flows for:
+
+- Auth
+- Cart
+- Checkout
+- Discount admin
+- Reporting
+
+---
+
+## 9. Assumptions
+
+- Codes are global (not per-user)
+- Only the admin can generate codes
+- Only one code redeemed per checkout
+- Discount applies once per order
+- DB is in-memory for assignment
+
+---
+
+## 10. Future Improvements (Not required)
+
+- UI frontend (React/Angular)
+- Redis cache
+- Order history UI
+- Payments simulation
+- Persistent Postgres store
