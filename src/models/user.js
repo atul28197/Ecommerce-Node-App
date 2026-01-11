@@ -1,0 +1,30 @@
+const { Model } = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+      static associate(models) {
+      // placeholder for future
+    }
+  }
+
+  User.init({
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+      validate: { isEmail: true }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    role: {
+      type: DataTypes.ENUM('user', 'admin'),
+      defaultValue: 'user'
+    }
+  }, {
+    sequelize,
+    modelName: 'User'
+  });
+
+  return User;
+};

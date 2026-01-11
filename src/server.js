@@ -1,15 +1,23 @@
 const app = require('./app');
-const { sequelize } = require('../models');
+const db = require('./db');
 
 const PORT = process.env.PORT || 3000;
 
 async function start() {
-  await sequelize.authenticate();
-  await sequelize.sync({ alter: true });  // create tables automatically
+  try {
+    await db.sequelize.authenticate();
+    console.log('DB connected.');
 
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+    await db.sequelize.sync(); // sqlite: create tables in memory
+    console.log('DB synchronized.');
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+
+  } catch (err) {
+    console.error('Failed to start server:', err);
+  }
 }
 
 start();
