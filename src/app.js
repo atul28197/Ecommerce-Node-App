@@ -28,7 +28,17 @@ const cartRoutes = require('./routes/cart.routes');
 app.use('/cart', cartRoutes);
 
 
-// Debug route to list all users
+const checkoutRoutes = require('./routes/checkout.routes');
+app.use('/checkout', checkoutRoutes);
+
+// To Debug route to get discounts code generated
+const adminRoutes = require('./routes/admin.routes');
+app.use('/admin', adminRoutes);
+
+
+
+
+// To Debug route to list all users in the system
 app.get('/debug/users', async (req, res) => {
   const users = await User.findAll({ attributes: ['id', 'email', 'role'] });
   res.json(users);
