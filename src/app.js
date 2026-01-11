@@ -19,8 +19,14 @@ app.get("/health", (req, res) => {
 const authRoutes = require('./routes/auth.routes');
 app.use('/auth', authRoutes);
 
+
 const productRoutes = require('./routes/product.routes');
 app.use('/products', productRoutes);
+
+
+const cartRoutes = require('./routes/cart.routes');
+app.use('/cart', cartRoutes);
+
 
 // Debug route to list all users
 app.get('/debug/users', async (req, res) => {
