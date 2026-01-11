@@ -2,6 +2,10 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+// The database instance
+const db = require('./db');
+const { User } = db;
+
 const app = express();
 
 app.use(cors());
@@ -14,6 +18,15 @@ app.get("/health", (req, res) => {
 
 const authRoutes = require('./routes/auth.routes');
 app.use('/auth', authRoutes);
+
+const productRoutes = require('./routes/product.routes');
+app.use('/products', productRoutes);
+
+// Debug route to list all users
+app.get('/debug/users', async (req, res) => {
+  const users = await User.findAll({ attributes: ['id', 'email', 'role'] });
+  res.json(users);
+});
 
 
 module.exports = app;
