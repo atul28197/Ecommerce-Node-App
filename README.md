@@ -60,9 +60,6 @@ User
 ├── list discount codes
 └── report
 
-yaml
-Copy code
-
 ---
 
 ## 📂 Folder Structure
@@ -80,8 +77,6 @@ swagger/
 postman/
 └─ ecommerce.postman_collection.json
 
-yaml
-Copy code
 
 ---
 
@@ -93,14 +88,10 @@ cp .env.example .env
 npm start
 Default server runs at:
 
-arduino
-Copy code
 http://localhost:3000
 🔐 Authentication
 Signup:
 
-bash
-Copy code
 POST /auth/signup
 {
   "email": "test@test.com",
@@ -108,34 +99,25 @@ POST /auth/signup
 }
 Login:
 
-bash
-Copy code
 POST /auth/login
 Auth header for protected routes:
 
-makefile
-Copy code
+
 Authorization: Bearer <token>
 Admin is seeded by test setup:
 
-css
-Copy code
+
 admin@example.com / admin123
 🧾 API Documentation
 Interactive Swagger UI:
 
-bash
-Copy code
 GET /api-docs
 OpenAPI Spec (export):
 
-bash
-Copy code
 /swagger/openapi.json
 Postman Collection:
 
-bash
-Copy code
+
 /postman/ecommerce.postman_collection.json
 🛍 Checkout + Discount Logic
 Every Nth order (configurable via .env) issues a discount code
@@ -146,15 +128,11 @@ Discount code = single-use
 
 Admin endpoints:
 
-pgsql
-Copy code
 POST /admin/discount-codes/generate
 GET  /admin/discount-codes
 GET  /admin/report
 Example post-checkout response:
 
-json
-Copy code
 {
   "subtotal": 50,
   "discount": 5,
@@ -162,8 +140,6 @@ Copy code
   "generatedCode": "QWE123"
 }
 📊 Admin Report Example
-json
-Copy code
 {
   "totalItemsSold": 42,
   "totalPurchaseAmount": 1299.5,
@@ -175,8 +151,6 @@ Copy code
 🧪 Testing
 Run test suite:
 
-bash
-Copy code
 npm test
 Tests cover:
 
@@ -188,26 +162,24 @@ Tests cover:
 
 Example:
 
-bash
-Copy code
 PASS  __tests__/checkout.test.js
 PASS  __tests__/admin.test.js
 PASS  __tests__/auth.test.js
 🎯 Assumptions (Explicit per Assignment)
-DB is in-memory (SQLite) per requirement
+DB is in-memory (SQLite) per the requirement
 
 Discount applies to entire order (not per item)
 
-Discount code is single-use
+The discount code is single-use
 
-Code belongs to system — not tied to user
+Code belongs to the system — not tied to the user
 
-Admin actions require admin role
+Admin actions require an admin role
 
 Nth-order config defaults to 5
 
 🧱 Design Tradeoffs
-Chose Sequelize for faster modeling + migration capability
+Choose Sequelize for faster modeling + migration capability
 
 Role-based access via middleware → avoids controller bloat
 
@@ -216,7 +188,7 @@ Transactional checkout logic avoids partial writes
 Separated admin/reporting logic for clarity
 
 🛠 Stretch Goals (If Time Allowed)
-If more time was available, I would add:
+If more time were available, I would add:
 
 Deployment (Render/Railway/AWS)
 
@@ -254,7 +226,7 @@ Introduce CQRS for reporting
 📤 What I Would Do Next
 To further evolve this:
 
-✔ Convert to microservice with event sourcing
+✔ Convert to a microservice with event sourcing
 ✔ Add async order/fulfillment pipeline
 ✔ Support multiple discount types (percentage, fixed, BOGO, tiered)
 
@@ -274,5 +246,3 @@ developer-friendly artifacts
 📬 Contact
 Submitted by: Atul Singh
 
-yaml
-Copy code
