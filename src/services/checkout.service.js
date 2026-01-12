@@ -39,7 +39,8 @@ async function checkout(userId, code) {
       userId,
       subtotal,
       discount,
-      total
+      total,
+      discountCodeId
     }, { transaction: t });
 
     for (const item of cart) {
@@ -53,15 +54,8 @@ async function checkout(userId, code) {
 
     await CartItem.destroy({ where: { userId }, transaction: t });
 
-    const count = await Order.count({ transaction: t });
 
-    if (count % NTH == 0) {
-      const newCode = Math.random().toString(36).slice(2, 8).toUpperCase();
-      await DiscountCode.create({ code: newCode }, { transaction: t });
-      order.generatedCode = newCode;
-    }
-
-    return order;
+    return order.get({ plain: true });
   });
 }
 

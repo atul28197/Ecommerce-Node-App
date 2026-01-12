@@ -4,17 +4,17 @@ const { User } = require('../db');
 
 
 exports.signup = async (req, res) => {
-  const { email, password, role } = req.body;
-
-  const hash = await bcrypt.hash(password, 10);
-
-  const user = await User.create({
-    email,
-    password: hash,
-    role: role || 'user'
-  });
-
-  res.status(201).json({ message: 'User created' });
+  try {
+    const hashed = await bcrypt.hash(req.body.password, 10);
+    const user = await User.create({
+      email: req.body.email,
+      password: hashed,
+      role: 'user'
+    });
+    res.json({ id: user.id });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 exports.login = async (req, res) => {

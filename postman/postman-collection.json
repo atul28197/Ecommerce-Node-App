@@ -1,0 +1,104 @@
+{
+  "info": {
+    "name": "Ecommerce Discount Assignment",
+    "_postman_id": "abcd-efgh-1234-5678",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n\"email\": \"user@test.com\",\n\"password\": \"123456\"\n}" },
+        "url": "{{host}}/auth/signup"
+      }
+    },
+    {
+      "name": "Login (User)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n\"email\": \"user@test.com\",\n\"password\": \"123456\"\n}" },
+        "url": "{{host}}/auth/login"
+      }
+    },
+    {
+      "name": "Login (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n\"email\": \"admin@example.com\",\n\"password\": \"admin123\"\n}" },
+        "url": "{{host}}/auth/login"
+      }
+    },
+    {
+      "name": "Add Product (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n\"title\": \"Coffee Mug\",\n\"price\": 10\n}" },
+        "url": "{{host}}/products"
+      }
+    },
+    {
+      "name": "Add To Cart",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{userToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n\"productId\": 1,\n\"qty\": 2\n}" },
+        "url": "{{host}}/cart/add"
+      }
+    },
+    {
+      "name": "Checkout (No Code)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{userToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{host}}/checkout"
+      }
+    },
+    {
+      "name": "Generate Discount Code (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{host}}/admin/discount-codes/generate"
+      }
+    },
+    {
+      "name": "Checkout (With Code)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{userToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n\"code\": \"{{discountCode}}\"\n}" },
+        "url": "{{host}}/checkout"
+      }
+    },
+    {
+      "name": "Admin Report",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+        ],
+        "url": "{{host}}/admin/report"
+      }
+    }
+  ]
+}
