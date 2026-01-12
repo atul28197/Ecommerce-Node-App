@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+const { swaggerUi, swaggerSpec } = require('./swagger');
+
+
 // The database instance
 const db = require('./db');
 const { User } = db;
@@ -43,6 +46,8 @@ app.get('/debug/users', async (req, res) => {
   const users = await User.findAll({ attributes: ['id', 'email', 'role'] });
   res.json(users);
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 module.exports = app;
